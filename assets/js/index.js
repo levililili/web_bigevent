@@ -1,6 +1,11 @@
 $(function () {
+<<<<<<< HEAD
     getUserInfo()
 
+=======
+
+    getUserInfo()
+>>>>>>> 8255fa824b868dea6fc9e911237348ccb40eb3ad
 
     // 实现退出提示
     let layer = layui.layer
