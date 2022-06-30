@@ -1,21 +1,6 @@
 $(function () {
-    // 获取用户的信息
-    $.ajax({
-        method: 'GET',
-        url: '/my/userinfo',
-        // headers 就是请求头配置对象
-        // headers: {
-        //     Authorization: localStorage.getItem('token') || '',
-        // },
-        success: function (res) {
-            if (res.status !== 0) {
-                return layui.layer.msg('获取用户信息失败！')
-            }
-            // 调用 renderAvatar 渲染用户的头像
-            renderAvatar(res.data)
-        }
+    getUserInfo()
 
-    })
 
     // 实现退出提示
     let layer = layui.layer
@@ -32,23 +17,44 @@ $(function () {
         });
     })
 
-    function renderAvatar(data) {
-        // 获取用户ming
-        let name = data.nickname || data.username
-        // 设置欢迎文本
-        $('#welcome').html('欢迎&nbsp;&nbsp;' + name)
-        // 按需渲染用户头像
-        // 1.用户有头像
-        if (data.user_pic !== null) {
-            $('.text-avatar').hide()
-            $('.layui-nav-img').attr('src', data.user_pic).show()
 
-        }
-        // 2.用户没有设置头像
-        else {
-            $('.layui-nav-img').hide()
-            $('.text-avatar').html(name[0].toUpperCase()).show()
-
-        }
-    }
 })
+function renderAvatar(data) {
+    // 获取用户ming
+    let name = data.nickname || data.username
+    // 设置欢迎文本
+    $('#welcome').html('欢迎&nbsp;&nbsp;' + name)
+    // 按需渲染用户头像
+    // 1.用户有头像
+    if (data.user_pic !== null) {
+        $('.text-avatar').hide()
+        $('.layui-nav-img').attr('src', data.user_pic).show()
+
+    }
+    // 2.用户没有设置头像
+    else {
+        $('.layui-nav-img').hide()
+        $('.text-avatar').html(name[0].toUpperCase()).show()
+
+    }
+}
+
+// 获取用户的信息
+function getUserInfo() {
+    $.ajax({
+        method: 'GET',
+        url: '/my/userinfo',
+        // headers 就是请求头配置对象
+        // headers: {
+        //     Authorization: localStorage.getItem('token') || '',
+        // },
+        success: function (res) {
+            if (res.status !== 0) {
+                return layui.layer.msg('获取用户信息失败！')
+            }
+            // 调用 renderAvatar 渲染用户的头像
+            renderAvatar(res.data)
+        }
+
+    })
+}

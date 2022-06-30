@@ -15,7 +15,6 @@ $.ajaxPrefilter(function (options) {
 
     // 权限控制
     options.complete = function (res) {
-        console.log(res)
         // 在complete中要拿到服务器返回的数据，用res.responseJSON
         if (res.responseJSON.status === 1 && res.responseJSON.message === '身份认证失败！') {
             // 1. 强制清空token
