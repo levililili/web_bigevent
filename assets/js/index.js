@@ -1,9 +1,10 @@
+let layer = layui.layer
 $(function () {
 
     getUserInfo()
 
     // 实现退出提示
-    let layer = layui.layer
+
     $('#btnLogout').on('click', function () {
         layer.confirm('此操作将退出登录, 是否继续?', { icon: 3, title: '提示' }, function (index) {
             //do something
@@ -29,6 +30,12 @@ function renderAvatar(data) {
     if (data.user_pic !== null) {
         $('.text-avatar').hide()
         $('.layui-nav-img').attr('src', data.user_pic).show()
+
+    }
+    // 2.用户没有设置头像
+    else {
+        $('.layui-nav-img').hide()
+        $('.text-avatar').html(name[0].toUpperCase()).show()
 
     }
 

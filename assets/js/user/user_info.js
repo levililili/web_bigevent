@@ -1,6 +1,16 @@
+let form = layui.form
+let layer = layui.layer
 $(function () {
-    let form = layui.form
-    let layer = layui.layer
+
+
+
+    form.verify({
+        nickname: function (value) {
+            if (value.length > 6) {
+                return '昵称长度必须在 1 ~ 6 个字符之间！'
+            }
+        }
+    })
 
     initUserInfo()
 
@@ -9,25 +19,6 @@ $(function () {
         e.preventDefault()
         initUserInfo()
     })
-
-    // 获取用户信息
-    function initUserInfo() {
-
-        $.ajax({
-            method: 'GET',
-            url: '/my/userinfo',
-            success: function (res) {
-                if (res.status !== 0) {
-                    return layui.layer.msg('获取用户信息失败！')
-                }
-                // 初始化用户的基本信息
-                // initUserMessage(res.data)
-                // 快速为表单赋值 form.val('filter', object);
-                form.val('formUserInfo', res.data)
-            }
-
-        })
-    }
 
     // 更新用户基本信息
     $('.layui-form').on('submit', function (e) {
@@ -55,3 +46,21 @@ $(function () {
     //     $('.layui-input-block [name=email]').val(data.email)
     // }
 })
+
+// 获取用户信息
+function initUserInfo() {
+    $.ajax({
+        method: 'GET',
+        url: '/my/userinfo',
+        success: function (res) {
+            if (res.status !== 0) {
+                return layui.layer.msg('获取用户信息失败！')
+            }
+            // 初始化用户的基本信息
+            // initUserMessage(res.data)
+            // 快速为表单赋值 form.val('filter', object);
+            form.val('formUserInfo', res.data)
+        }
+
+    })
+}
