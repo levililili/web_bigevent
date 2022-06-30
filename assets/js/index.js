@@ -1,6 +1,6 @@
 $(function () {
-    getUserInfo()
 
+    getUserInfo()
 
     // 实现退出提示
     let layer = layui.layer
@@ -31,12 +31,7 @@ function renderAvatar(data) {
         $('.layui-nav-img').attr('src', data.user_pic).show()
 
     }
-    // 2.用户没有设置头像
-    else {
-        $('.layui-nav-img').hide()
-        $('.text-avatar').html(name[0].toUpperCase()).show()
 
-    }
 }
 
 // 获取用户的信息
